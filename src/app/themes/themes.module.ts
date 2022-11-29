@@ -5,6 +5,7 @@ import { AllThemesComponent } from './all-themes/all-themes.component';
 import { ThemeDetailsComponent } from './theme-details/theme-details.component';
 import { PostsComponent } from './posts/posts.component';
 import { themesRoutingModule } from './themes-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -18,6 +19,7 @@ import { themesRoutingModule } from './themes-routing.module';
   imports: [
     CommonModule,
     themesRoutingModule,
+    SharedModule
   ]
 })
 export class ThemesModule { }

@@ -16,8 +16,8 @@ export class ThemesService {
     return this.http.get<ITheme[]>(`${environment.apiUrl}/themes`);
   }
 
-  getThemeById() {
-    return
+  getThemeById(id: string) {
+    return this.http.get<ITheme>(`${environment.apiUrl}/themes/${id}`);
   }
 
   getRecentPosts(limit: number) {

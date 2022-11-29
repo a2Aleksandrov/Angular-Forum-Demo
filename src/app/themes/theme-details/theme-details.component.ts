@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ITheme } from 'src/app/shared/interfaces';
+import { ThemesService } from '../themes.service';
 
 @Component({
   selector: 'app-theme-details',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThemeDetailsComponent implements OnInit {
 
-  constructor() { }
+  theme!: ITheme
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private themesService: ThemesService) { }
 
   ngOnInit(): void {
+    const themeId = this.activatedRoute.snapshot.params['themeId'];
+    console.log(themeId);
+    this.themesService.getThemeById(themeId).subscribe({
+      next: (theme) => {
+        this.theme = theme;
+        console.log(theme);
+      }
+    });
   }
 
 }
