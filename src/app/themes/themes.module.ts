@@ -4,6 +4,7 @@ import { NewThemeComponent } from './new-theme/new-theme.component';
 import { AllThemesComponent } from './all-themes/all-themes.component';
 import { ThemeDetailsComponent } from './theme-details/theme-details.component';
 import { PostsComponent } from './posts/posts.component';
+import { themesRoutingModule } from './themes-routing.module';
 
 
 
@@ -15,7 +16,8 @@ import { PostsComponent } from './posts/posts.component';
     PostsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    themesRoutingModule,
   ]
 })
 export class ThemesModule { }

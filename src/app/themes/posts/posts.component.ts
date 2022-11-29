@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IPost } from 'src/app/shared/interfaces';
+import { ThemesService } from '../themes.service';
 
 @Component({
   selector: 'app-posts',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
-  constructor() { }
+  posts!: IPost[];
+
+  constructor(private themesService: ThemesService) { }
 
   ngOnInit(): void {
+    this.themesService.getRecentPosts(5).subscribe({
+      next: (posts) => {
+        this.posts = posts;
+      }
+    });
   }
-
 }
