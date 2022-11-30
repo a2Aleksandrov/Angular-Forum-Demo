@@ -6,6 +6,7 @@ import { ThemeDetailsComponent } from './theme-details/theme-details.component';
 import { PostsComponent } from './posts/posts.component';
 import { themesRoutingModule } from './themes-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     themesRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class ThemesModule { }
