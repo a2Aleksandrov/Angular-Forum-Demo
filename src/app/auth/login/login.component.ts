@@ -51,9 +51,6 @@ export class LoginComponent implements OnInit {
       next: () => {
         this.router.navigate(['/themes']);
       },
-      complete: () => {
-        console.log('login stream completed.')
-      },
       error: (err) => {
         this.errorMessage = err.error.errorMessage;
       }
