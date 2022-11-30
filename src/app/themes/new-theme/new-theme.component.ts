@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-theme',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewThemeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
+  addTheme() {
+
+  }
+
+  cancelTheme() {
+    this.router.navigate(['/themes']);
+  }
 }
