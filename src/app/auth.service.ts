@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ICreateUser, ILogInUser } from './shared/interfaces';
 
@@ -37,6 +37,13 @@ export class AuthService {
     return this.http.post<void>(`${environment.apiUrl}/logout`, {}, { withCredentials: true });
   }
 
+  authenticate(): Observable<ICreateUser> {
+    return this.http.get<ICreateUser>(`${environment.apiUrl}/users/profile`, { withCredentials: true })
+      .pipe(tap(currentProfile => this.handleLogin(currentProfile)), catchError((err) => {
+        return  EMPTY; // this is syntax for empty Obesarvable.
+      }))
+  }
+
   handleLogin(newUser: ICreateUser) {
     this._currentUser.next(newUser);
   }
@@ -44,4 +51,6 @@ export class AuthService {
   handleLogout() {
     this._currentUser.next(undefined);
   }
+
+
 }
