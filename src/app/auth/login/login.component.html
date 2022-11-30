@@ -1,30 +1,37 @@
 <div class="container">
-    <form class="login" action="" method="post">
+    <form class="login" [formGroup]="loginFormGroup" (ngSubmit)="Login()">
 
         <fieldset>
             <h2>Login Form</h2>
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input class="input-error" type="email" name="email" id="email" placeholder="john.doe@gmail.com">
+                <input class="input-error" formControlName="email" type="email" name="email" id="email"
+                    placeholder="john.doe@gmail.com">
             </p>
-            <p class="error">
-                Email is required!
-            </p>
-            <p class="error">
-                Email is not valid!
-            </p>
+
+            <ng-container *ngIf="touchedAndInvalid('email')">
+                <p class="error" *ngIf="isRequired('email')">
+                    Email is required!
+                </p>
+                <p class="error" *ngIf="isInvalid('email')">
+                    Email is not valid!
+                </p>
+            </ng-container>
 
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="password" id="password" placeholder="******">
+                <input formControlName="password" type="password" name="password" id="password" placeholder="******">
             </p>
-            <p class="error">
-                Password is required!
-            </p>
-            <p class="error">
-                Password must be at least 4 characters!
-            </p>
+
+            <ng-container *ngIf="touchedAndInvalid('password')">
+                <p class="error" *ngIf="isRequired('password')">
+                    Password is required!
+                </p>
+                <p class="error" *ngIf="hasMinLength('password')">
+                    Password must be at least 5 characters!
+                </p>
+            </ng-container>
 
             <button disabled>Login</button>
 
