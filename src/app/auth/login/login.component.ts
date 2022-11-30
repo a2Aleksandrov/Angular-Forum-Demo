@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 import { customEmailValidator } from '../util';
 
 @Component({
@@ -14,8 +16,12 @@ export class LoginComponent implements OnInit {
     password: new FormControl(null, [Validators.required, Validators.minLength(5)])
   });
 
+  errorMessage!: string;
+
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,14 +39,24 @@ export class LoginComponent implements OnInit {
 
   hasMinLength(control: string) {
     let current = this.loginFormGroup.controls[`${control}`];
-    return current.errors?.['minLength'];
+    return current.errors?.['minlength'];
   }
 
   isInvalid(email: string) {
     return this.loginFormGroup.controls[`${email}`].errors?.['emailError'];
   }
 
-  Login() {
-
+  login() {
+    this.authService.login(this.loginFormGroup.value).subscribe({
+      next: () => {
+        this.router.navigate(['/themes']);
+      },
+      complete: () => {
+        console.log('login stream completed.')
+      },
+      error: (err) => {
+        this.errorMessage = err.error.errorMessage;
+      }
+    });
   }
 }

@@ -5,6 +5,8 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 
@@ -18,6 +20,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RouterModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ]
 })
 export class AuthModule { }

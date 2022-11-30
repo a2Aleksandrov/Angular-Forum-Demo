@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 import { customEmailValidator, passwordsMatch } from '../util';
 
 @Component({
@@ -26,7 +28,11 @@ export class RegisterComponent implements OnInit {
     })
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -64,6 +70,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-
+    this.authService.register(this.registerFormGroup.value).subscribe({
+      next: () => {
+        this.router.navigate(['/themes']);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 }
