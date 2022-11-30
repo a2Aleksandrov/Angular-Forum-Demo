@@ -1,9 +1,11 @@
 <div class="container">
-    <form class="login" [formGroup]="loginFormGroup" (ngSubmit)="Login()">
+    <form class="login" [formGroup]="loginFormGroup" (ngSubmit)="login()">
 
         <fieldset>
             <h2>Login Form</h2>
 
+            <p>{{errorMessage}}</p>
+            
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
                 <input class="input-error" formControlName="email" type="email" name="email" id="email"
@@ -33,7 +35,7 @@
                 </p>
             </ng-container>
 
-            <button disabled>Login</button>
+            <button [disabled]="loginFormGroup.invalid">Login</button>
 
             <p class="text-center">
                 Have an account?
