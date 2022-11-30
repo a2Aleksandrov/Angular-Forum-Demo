@@ -15,3 +15,14 @@ export function customEmailValidator(control: AbstractControl): ValidationErrors
     }
     return null;
 }
+
+export function passwordsMatch(password: AbstractControl) {
+    return (rePassword: AbstractControl) => {
+        if (rePassword.value !== password.value) {
+            return {
+                doesNotMatch: true
+            }
+        }
+        return null;
+    }
+}
