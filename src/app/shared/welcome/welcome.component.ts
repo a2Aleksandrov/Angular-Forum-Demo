@@ -13,11 +13,8 @@ export class WelcomeComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.isLoggedIn.subscribe({
-      next: (hasUser) => {
-        this.isLoggedIn = hasUser;
-      }
-    });
+    this.authService.isLoggedIn.subscribe(hasUser => this.isLoggedIn = hasUser);
   }
-
 }
+
+

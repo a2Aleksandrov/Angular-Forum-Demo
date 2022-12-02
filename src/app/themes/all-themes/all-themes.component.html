@@ -1,4 +1,4 @@
-<app-welcome></app-welcome>
+<app-welcome *ngIf="!isLoggedIn"></app-welcome>
 
 <div class="container">
 
@@ -21,7 +21,8 @@
                                 </div>
                             </div>
                             <div class="subscribers">
-                                <button class="subscribe">Subscribe</button>
+                                <button class="subscribe" (click)="onSubscribe($event)">Subscribe</button>
+                                <button class="unsubscribe">Unsubscribe</button>
                                 <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                             </div>
                         </div>

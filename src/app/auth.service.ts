@@ -9,7 +9,7 @@ import { ICreateUser, ILogInUser } from './shared/interfaces';
 })
 export class AuthService {
 
-  private _currentUser = new BehaviorSubject<ILogInUser | undefined>(undefined);
+  private _currentUser = new BehaviorSubject<ICreateUser | undefined>(undefined);
   currentUser = this._currentUser.asObservable();
   isLoggedIn = this.currentUser.pipe(map(user => !!user));
 
